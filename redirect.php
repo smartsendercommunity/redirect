@@ -97,10 +97,10 @@ if ($input["url"] != NULL && $input["userId"] != NULL) {
         $htaccess = file_get_contents($_SERVER["DOCUMENT_ROOT"]."/.htaccess");
         if (stripos($htaccess, "RewriteEngine On") !== false && stripos($htaccess, "RewriteRule ^([^\.]+)$ $1.php") !== false && stripos($htaccess, "RewriteBase /") !== false && !file_exists("redirect")) {
             $result["state"] = true;
-            $result["message"]["url"] = $url."redirect?".$code;
+            $result["message"]["url"] = $url."/redirect?".$code;
         } else {
             $result["state"] = true;
-            $result["message"]["url"] = $url."redirect.php?".$code;
+            $result["message"]["url"] = $url."/redirect.php?".$code;
         }
     } else {
         $result["state"] = false;
