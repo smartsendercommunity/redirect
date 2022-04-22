@@ -13,7 +13,7 @@ header('Access-Control-Allow-Headers: application/json');
 header('Content-Type: application/json; charset=utf-8');
 
 
-$ssToken = "ZURwGiwJj9OQmysBHltHJ23RqLvYSrLHfPtetugRPopv2MPYhvj92vroHP5x";
+$ssToken = "";
 $defaultUrl = "https://google.com";
 
 $input = json_decode(file_get_contents("php://input"), true);
