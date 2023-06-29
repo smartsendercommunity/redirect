@@ -46,6 +46,9 @@ function gen_random_string($length=6) {
     $url = ((!empty($_SERVER["HTTPS"])) ? "https" : "http") . "://" . $_SERVER["HTTP_HOST"] . $dir;
     $url = explode("?", $url);
     $url = $url[0];
+	if (substr($url, -1) != "/") {
+		$url = $url."/";
+	}
     if (!file_exists($_SERVER["DOCUMENT_ROOT"]."/.htaccess")) {
         file_put_contents($_SERVER["DOCUMENT_ROOT"]."/.htaccess", "RewriteEngine On".PHP_EOL."RewriteBase /".PHP_EOL."RewriteRule ^([^\.]+)$ $1.php".PHP_EOL."RewriteRule .* - [e=HTTP_AUTHORIZATION:%{HTTP:Authorization}]");
     }
@@ -97,10 +100,10 @@ if ($input["url"] != NULL && $input["userId"] != NULL) {
         $htaccess = file_get_contents($_SERVER["DOCUMENT_ROOT"]."/.htaccess");
         if (stripos($htaccess, "RewriteEngine On") !== false && stripos($htaccess, "RewriteRule ^([^\.]+)$ $1.php") !== false && stripos($htaccess, "RewriteBase /") !== false && !file_exists("redirect")) {
             $result["state"] = true;
-            $result["message"]["url"] = $url."/redirect?".$code;
+            $result["message"]["url"] = $url."redirect?".$code;
         } else {
             $result["state"] = true;
-            $result["message"]["url"] = $url."/redirect.php?".$code;
+            $result["message"]["url"] = $url."redirect.php?".$code;
         }
     } else {
         $result["state"] = false;
